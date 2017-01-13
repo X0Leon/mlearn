@@ -1,11 +1,20 @@
 # mlearn
 
-Sequence learning methods. Alpha state.
+Sequence machine learning methods. Alpha state currently. [中文](story.md)
 
-M山的诸神故事
+Implementation or wrapper of useful machine learning algorithms.
 
-- 隐秘的D神：在幕后操控一切，神迹得见诸人
+## Including:
 
-    * 由一些迹象推测D神的思维模式
-    * 世间流传着远古的HMM启示录
+- Hidden Markov Model (HMM) with Gaussian mixtures
+
+## Dependencies:
+
+- Python 3.5+
+- numpy/scipy
+- scikit-learn
+
+Copyright (c) 2017 X0Leon (Leon Zhang) Email: pku09zl[at]gmail[dot]com
+
+
 
