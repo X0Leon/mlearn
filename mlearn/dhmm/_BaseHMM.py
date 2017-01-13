@@ -150,7 +150,7 @@ class _BaseHMM(object):
                 #        path = numpy.zeros((len(observations)),dtype=self.precision)
                 # ### 2012-11-17 - BUG FIX: wrong reinitialization destroyed the last state in the path
         for i in range(1, len(observations)):
-            path[len(observations) - i - 1] = psi[len(observations) - i][path[len(observations) - i]]
+            path[len(observations) - i - 1] = psi[len(observations) - i][int(path[len(observations) - i])]
         return path
 
     def _calc_xi(self, observations, alpha=None, beta=None):
