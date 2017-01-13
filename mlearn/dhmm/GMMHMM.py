@@ -5,7 +5,9 @@ Created on Jan 11, 2017
 
 @author:Leon
 """
+
 import numpy as np
+
 from ._ContinuousHMM import _ContinuousHMM
 
 

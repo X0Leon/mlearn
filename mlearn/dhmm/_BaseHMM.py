@@ -34,7 +34,6 @@ class _BaseHMM(object):
         """
         return 1.
 
-
     def forward_backward(self, observations, cache=False):
         """
         calculate the probability of the observation, given the model, i.e., P(O|model).

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
-'''
+"""
 Created on Jan 11, 2017
 
 @author:Leon
-'''
+"""
+
 
 from .GMMHMM import GMMHMM
 from .weights.EWMA import EWMA

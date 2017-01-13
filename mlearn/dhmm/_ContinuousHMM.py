@@ -67,7 +67,7 @@ class _ContinuousHMM(_BaseHMM):
             self.means = np.zeros((self.n, self.m, self.d), dtype=self.precision)
             self.covars = [[np.matrix(np.ones((self.d, self.d), dtype=self.precision)) for j in range(self.m)]
                            for i in range(self.n)]
-        elif init_type == 'user':
+        else:
             # if the user provided a 4-d array as the covars, replace it with a 2-d array of np matrices.
             covars_tmp = [[np.matrix(np.ones((self.d, self.d), dtype=self.precision)) for j in range(self.m)] for
                           i in range(self.n)]
@@ -93,17 +93,15 @@ class _ContinuousHMM(_BaseHMM):
             for t in range(len(observations)):
                 self.B_map[j][t] = self._calc_bjt(j, t, observations[t])
 
-    """
-    b[j][Ot] = sum(1...M)w[j][m]*b[j][m][Ot]
-    Returns b[j][Ot] based on the current model parameters (means, covars, weights) for the mixtures.
-    - j - state
-    - Ot - the current observation
-    Note: there's no need to get the observation itself as it has been used for calculation before.
-    """
-
     def _calc_bjt(self, j, t, Ot):
         """
         Helper method to compute Bj(Ot) = sum(1...M){Wjm*Bjm(Ot)}
+
+        b[j][Ot] = sum(1...M)w[j][m]*b[j][m][Ot]
+        Returns b[j][Ot] based on the current model parameters (means, covars, weights) for the mixtures.
+        - j - state
+        - Ot - the current observation
+        Note: there's no need to get the observation itself as it has been used for calculation before.
         """
         bjt = 0
         for m in range(self.m):
@@ -239,3 +237,16 @@ class _ContinuousHMM(_BaseHMM):
         mixture component.
         """
         raise NotImplementedError("PDF function must be implemented")
+
+    def predict(self, observations):
+        """
+        Predict the mean of dth feature of next observation after training, P(Ot+1|model)
+        Sum the weighted mean of Gaussian distributions on each weighted state
+        """
+        next_obs = []
+        for i in range(self.d):
+            prob_vec = self.A[int(self.decode(observations)[-1])]
+            mean_vec = np.sum(self.means[:, :, i] * self.w, axis=1)
+            next_feature = np.sum(prob_vec * mean_vec)
+            next_obs.append(next_feature)
+        return next_obs
