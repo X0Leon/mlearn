@@ -183,7 +183,7 @@ class _BaseHMM(object):
                     numer *= self.A[i][j]
                     numer *= self.B_map[j][t + 1]
                     numer *= beta[t + 1][j]
-                    xi[t][i][j] = numer / denom
+                    xi[t][i][j] = numer / denom 
 
         return xi
 

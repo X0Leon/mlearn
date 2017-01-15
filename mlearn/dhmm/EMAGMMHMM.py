@@ -5,10 +5,8 @@ Created on Jan 11, 2017
 
 @author:Leon
 """
-
-
 from .GMMHMM import GMMHMM
-from .weights.EWMA import EWMA
+from .weights import EWMA
 import numpy as np
 
 
